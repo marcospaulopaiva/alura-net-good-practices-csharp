@@ -14,18 +14,17 @@ try
             break;
         case "help":
             var help = new Help();
-            help.ListaDeComandos(args);
+            help.ExibeDocumentacao(parametros:args);
             break;
         case "show":
             var show = new Show();
-            show.ExibirArquivo(caminhoDoArquivoASerExibido: args[1]);
+            show.ExibirConteudoArquivo(caminhoDoArquivoASerExibido: args[1]);
             break;
         case "list":
             var list = new List();
-            await list.ListarPets();
+            await list.ListarDadosPetsDaAPIAsync();
             break;
         default:
-            // exibe mensagem de comando inválido
             Console.WriteLine("Comando inválido!");
             break;
     }

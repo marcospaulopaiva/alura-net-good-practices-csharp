@@ -3,6 +3,8 @@ using System.Net.Http.Json;
 
 namespace Alura.Adopet.Console
 {
+    [DocComando(instrucao: "list",
+    documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados da AdoPet.")]
     public class List
     {
         HttpClient client;
@@ -12,7 +14,7 @@ namespace Alura.Adopet.Console
             this.client = ConfiguraHttpClient("http://localhost:5057");
         }
 
-        public async Task ListarPets()
+        public async Task ListarDadosPetsDaAPIAsync()
         {
             var pets = await ListPetsAsync();
             foreach (var pet in pets)
