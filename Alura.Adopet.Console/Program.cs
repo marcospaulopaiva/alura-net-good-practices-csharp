@@ -1,31 +1,29 @@
 ﻿using Alura.Adopet.Console.Comandos;
 
 Console.ForegroundColor = ConsoleColor.Green;
+
+Dictionary<string, IComando> comandosDoSistema = new()
+{
+    {"import", new Import()},
+    {"help", new Help()},
+    {"show", new Show()},
+    {"list", new List()},
+};
+
 try
 {
     string comando = args[0].Trim();
-    switch (comando)
+
+    if (comandosDoSistema.ContainsKey(comando))
     {
-        case "import":
-            var import = new Import();
-            await import.ExecutarAsync(args);
-            break;
-        case "help":
-            var help = new Help();
-            await help.ExecutarAsync(args);
-            break;
-        case "show":
-            var show = new Show();
-            await show.ExecutarAsync(args);
-            break;
-        case "list":
-            var list = new List();
-            await list.ExecutarAsync(args);
-            break;
-        default:
-            Console.WriteLine("Comando inválido!");
-            break;
+        IComando? comandosASerExecutado = comandosDoSistema[comando];
+        await comandosASerExecutado.ExecutarAsync(args);
     }
+    else
+    {
+        Console.WriteLine("Comando inválido!");
+    }
+
 }
 catch (Exception ex)
 {
